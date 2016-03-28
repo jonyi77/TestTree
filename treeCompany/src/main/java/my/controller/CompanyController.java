@@ -14,8 +14,11 @@ public class CompanyController {
 	
 	@RequestMapping("/company")
 	public String companyView(Model model) {
-		model.addAttribute("companies", companyServiceImpl.getTree(companyServiceImpl.getAllRoot()));
+		companyServiceImpl.setCompaniesNull();
+		model.addAttribute("companies", companyServiceImpl.getTree(companyServiceImpl.getAllRoot(),-1));
 		return "company";
 	}
+	
+	
 
 }

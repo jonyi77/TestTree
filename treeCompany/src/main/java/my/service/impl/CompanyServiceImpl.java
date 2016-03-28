@@ -13,11 +13,15 @@ import my.service.CompanyService;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 	
-	private List<Company> companies = new ArrayList<>();
+	private List<Company> companies;
 	
 	@Autowired
 	private CompanyRepository companyRepository;
 	
+	public void setCompaniesNull() {
+		this.companies = new ArrayList<>();
+	}
+
 	public Company addCompany(Company company) {
 		Company saveCompany = companyRepository.save(company);
 		return saveCompany;
@@ -51,13 +55,14 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyRepository.findAllRoot();
 	}
 	
-	public List<Company> getTree(Iterable<Company> company){
+	public List<Company> getTree(Iterable<Company> company, int level){
+		level ++;
 		for (Company company2 : company) {
-//			company2.setLevel(level);
+			company2.setLevel(level);
 			companies.add(company2);
 			if (companyRepository.findAllChildren(company2) != null){
-//				level +=1;
-				getTree(companyRepository.findAllChildren(company2));
+				
+				getTree(companyRepository.findAllChildren(company2), level);
 			}
 		}
 		return companies;
