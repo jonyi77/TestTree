@@ -11,11 +11,10 @@
 	<table>
 		<c:forEach var="company" items="${companies}">
 			<tr>
-				<td style="padding-left: 20*${company.level}">${company.name}</td>
+				<td style="padding-left: calc(25px*${company.level})">-${company.name} ${company.invest}</td>
 			</tr>
 		</c:forEach>
 	</table>
-	<span style="margin-left: 20*20; display: block;" >jlhvjlhv</span>
 	
 
 </body>
